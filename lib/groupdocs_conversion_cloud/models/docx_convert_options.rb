@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="docx_convert_options.rb">
- #   Copyright (c) 2003-2022 Aspose Pty Ltd
+ #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -60,6 +60,12 @@ module GroupDocsConversionCloud
 
     # Recognition mode when converting from pdf
     attr_accessor :pdf_recognition_mode
+
+    # Page size
+    attr_accessor :page_size
+
+    # Specifies page orientation
+    attr_accessor :page_orientation
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -94,7 +100,9 @@ module GroupDocsConversionCloud
         :'password' => :'Password',
         :'zoom' => :'Zoom',
         :'watermark_options' => :'WatermarkOptions',
-        :'pdf_recognition_mode' => :'PdfRecognitionMode'
+        :'pdf_recognition_mode' => :'PdfRecognitionMode',
+        :'page_size' => :'PageSize',
+        :'page_orientation' => :'PageOrientation'
       }
     end
 
@@ -110,7 +118,9 @@ module GroupDocsConversionCloud
         :'password' => :'String',
         :'zoom' => :'Integer',
         :'watermark_options' => :'WatermarkOptions',
-        :'pdf_recognition_mode' => :'String'
+        :'pdf_recognition_mode' => :'String',
+        :'page_size' => :'String',
+        :'page_orientation' => :'String'
       }
     end
 
@@ -164,6 +174,14 @@ module GroupDocsConversionCloud
         self.pdf_recognition_mode = attributes[:'PdfRecognitionMode']
       end
 
+      if attributes.key?(:'PageSize')
+        self.page_size = attributes[:'PageSize']
+      end
+
+      if attributes.key?(:'PageOrientation')
+        self.page_orientation = attributes[:'PageOrientation']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -198,6 +216,14 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'pdf_recognition_mode', pdf_recognition_mode cannot be nil.")
       end
 
+      if @page_size.nil?
+        invalid_properties.push("invalid value for 'page_size', page_size cannot be nil.")
+      end
+
+      if @page_orientation.nil?
+        invalid_properties.push("invalid value for 'page_orientation', page_orientation cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -213,6 +239,12 @@ module GroupDocsConversionCloud
       return false if @pdf_recognition_mode.nil?
       pdf_recognition_mode_validator = EnumAttributeValidator.new('String', ["Textbox", "Flow"])
       return false unless pdf_recognition_mode_validator.valid?(@pdf_recognition_mode)
+      return false if @page_size.nil?
+      page_size_validator = EnumAttributeValidator.new('String', ["Default", "A3", "Statement", "Quarto", "Paper11x17", "Paper10x14", "Letter", "Legal", "Ledger", "Folio", "Executive", "EnvelopeDL", "Custom", "B5", "B4", "A5", "A4", "Tabloid"])
+      return false unless page_size_validator.valid?(@page_size)
+      return false if @page_orientation.nil?
+      page_orientation_validator = EnumAttributeValidator.new('String', ["Default", "Landscape", "Portrait"])
+      return false unless page_orientation_validator.valid?(@page_orientation)
       return true
     end
 
@@ -230,6 +262,34 @@ module GroupDocsConversionCloud
       end
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] page_size Object to be assigned
+    def page_size=(page_size)
+      validator = EnumAttributeValidator.new('String', ["Default", "A3", "Statement", "Quarto", "Paper11x17", "Paper10x14", "Letter", "Legal", "Ledger", "Folio", "Executive", "EnvelopeDL", "Custom", "B5", "B4", "A5", "A4", "Tabloid"])
+      if page_size.to_i == 0
+        unless validator.valid?(page_size)
+          raise ArgumentError, "invalid value for 'page_size', must be one of #{validator.allowable_values}."
+        end
+        @page_size = page_size
+      else
+        @page_size = validator.allowable_values[page_size.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] page_orientation Object to be assigned
+    def page_orientation=(page_orientation)
+      validator = EnumAttributeValidator.new('String', ["Default", "Landscape", "Portrait"])
+      if page_orientation.to_i == 0
+        unless validator.valid?(page_orientation)
+          raise ArgumentError, "invalid value for 'page_orientation', must be one of #{validator.allowable_values}."
+        end
+        @page_orientation = page_orientation
+      else
+        @page_orientation = validator.allowable_values[page_orientation.to_i]
+      end
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(other)
@@ -244,7 +304,9 @@ module GroupDocsConversionCloud
           password == other.password &&
           zoom == other.zoom &&
           watermark_options == other.watermark_options &&
-          pdf_recognition_mode == other.pdf_recognition_mode
+          pdf_recognition_mode == other.pdf_recognition_mode &&
+          page_size == other.page_size &&
+          page_orientation == other.page_orientation
     end
 
     # @see the `==` method
@@ -256,7 +318,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, width, height, dpi, password, zoom, watermark_options, pdf_recognition_mode].hash
+      [from_page, pages_count, pages, width, height, dpi, password, zoom, watermark_options, pdf_recognition_mode, page_size, page_orientation].hash
     end
 
     # Downcases first letter.
