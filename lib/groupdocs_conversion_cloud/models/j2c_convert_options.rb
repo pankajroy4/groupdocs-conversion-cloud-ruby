@@ -40,6 +40,9 @@ module GroupDocsConversionCloud
     # Convert specific pages. The list contains the page indexes of the pages to be converted
     attr_accessor :pages
 
+    # Watermark specific options
+    attr_accessor :watermark_options
+
     # Desired image width after conversion
     attr_accessor :width
 
@@ -60,9 +63,6 @@ module GroupDocsConversionCloud
 
     # If true, the input firstly is converted to PDF and after that to desired format
     attr_accessor :use_pdf
-
-    # Watermark specific options
-    attr_accessor :watermark_options
 
     # Adjust image brightness
     attr_accessor :brightness
@@ -106,6 +106,7 @@ module GroupDocsConversionCloud
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
+        :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Width',
         :'height' => :'Height',
         :'horizontal_resolution' => :'HorizontalResolution',
@@ -113,7 +114,6 @@ module GroupDocsConversionCloud
         :'grayscale' => :'Grayscale',
         :'rotate_angle' => :'RotateAngle',
         :'use_pdf' => :'UsePdf',
-        :'watermark_options' => :'WatermarkOptions',
         :'brightness' => :'Brightness',
         :'contrast' => :'Contrast',
         :'gamma' => :'Gamma',
@@ -128,6 +128,7 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
+        :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
         :'horizontal_resolution' => :'Integer',
@@ -135,7 +136,6 @@ module GroupDocsConversionCloud
         :'grayscale' => :'BOOLEAN',
         :'rotate_angle' => :'Integer',
         :'use_pdf' => :'BOOLEAN',
-        :'watermark_options' => :'WatermarkOptions',
         :'brightness' => :'Integer',
         :'contrast' => :'Integer',
         :'gamma' => :'Float',
@@ -166,6 +166,10 @@ module GroupDocsConversionCloud
         end
       end
 
+      if attributes.key?(:'WatermarkOptions')
+        self.watermark_options = attributes[:'WatermarkOptions']
+      end
+
       if attributes.key?(:'Width')
         self.width = attributes[:'Width']
       end
@@ -192,10 +196,6 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'UsePdf')
         self.use_pdf = attributes[:'UsePdf']
-      end
-
-      if attributes.key?(:'WatermarkOptions')
-        self.watermark_options = attributes[:'WatermarkOptions']
       end
 
       if attributes.key?(:'Brightness')
@@ -327,6 +327,7 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
+          watermark_options == other.watermark_options &&
           width == other.width &&
           height == other.height &&
           horizontal_resolution == other.horizontal_resolution &&
@@ -334,7 +335,6 @@ module GroupDocsConversionCloud
           grayscale == other.grayscale &&
           rotate_angle == other.rotate_angle &&
           use_pdf == other.use_pdf &&
-          watermark_options == other.watermark_options &&
           brightness == other.brightness &&
           contrast == other.contrast &&
           gamma == other.gamma &&
@@ -351,7 +351,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, watermark_options, brightness, contrast, gamma, flip_mode, quality].hash
+      [from_page, pages_count, pages, watermark_options, width, height, horizontal_resolution, vertical_resolution, grayscale, rotate_angle, use_pdf, brightness, contrast, gamma, flip_mode, quality].hash
     end
 
     # Downcases first letter.

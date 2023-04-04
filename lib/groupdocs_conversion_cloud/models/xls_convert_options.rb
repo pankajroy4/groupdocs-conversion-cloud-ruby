@@ -40,6 +40,9 @@ module GroupDocsConversionCloud
     # Convert specific pages. The list contains the page indexes of the pages to be converted
     attr_accessor :pages
 
+    # Watermark specific options
+    attr_accessor :watermark_options
+
     # Set this property if you want to protect the converted document with a password
     attr_accessor :password
 
@@ -49,19 +52,16 @@ module GroupDocsConversionCloud
     # If true, the input firstly is converted to PDF and after that to desired format
     attr_accessor :use_pdf
 
-    # Watermark specific options
-    attr_accessor :watermark_options
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
+        :'watermark_options' => :'WatermarkOptions',
         :'password' => :'Password',
         :'zoom' => :'Zoom',
-        :'use_pdf' => :'UsePdf',
-        :'watermark_options' => :'WatermarkOptions'
+        :'use_pdf' => :'UsePdf'
       }
     end
 
@@ -71,10 +71,10 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
+        :'watermark_options' => :'WatermarkOptions',
         :'password' => :'String',
         :'zoom' => :'Integer',
-        :'use_pdf' => :'BOOLEAN',
-        :'watermark_options' => :'WatermarkOptions'
+        :'use_pdf' => :'BOOLEAN'
       }
     end
 
@@ -100,6 +100,10 @@ module GroupDocsConversionCloud
         end
       end
 
+      if attributes.key?(:'WatermarkOptions')
+        self.watermark_options = attributes[:'WatermarkOptions']
+      end
+
       if attributes.key?(:'Password')
         self.password = attributes[:'Password']
       end
@@ -110,10 +114,6 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'UsePdf')
         self.use_pdf = attributes[:'UsePdf']
-      end
-
-      if attributes.key?(:'WatermarkOptions')
-        self.watermark_options = attributes[:'WatermarkOptions']
       end
 
     end
@@ -159,10 +159,10 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
+          watermark_options == other.watermark_options &&
           password == other.password &&
           zoom == other.zoom &&
-          use_pdf == other.use_pdf &&
-          watermark_options == other.watermark_options
+          use_pdf == other.use_pdf
     end
 
     # @see the `==` method
@@ -174,7 +174,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, password, zoom, use_pdf, watermark_options].hash
+      [from_page, pages_count, pages, watermark_options, password, zoom, use_pdf].hash
     end
 
     # Downcases first letter.

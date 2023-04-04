@@ -40,12 +40,16 @@ module GroupDocsConversionCloud
     # Convert specific pages. The list contains the page indexes of the pages to be converted
     attr_accessor :pages
 
+    # Watermark specific options
+    attr_accessor :watermark_options
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
-        :'pages' => :'Pages'
+        :'pages' => :'Pages',
+        :'watermark_options' => :'WatermarkOptions'
       }
     end
 
@@ -54,7 +58,8 @@ module GroupDocsConversionCloud
       {
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
-        :'pages' => :'Array<Integer>'
+        :'pages' => :'Array<Integer>',
+        :'watermark_options' => :'WatermarkOptions'
       }
     end
 
@@ -78,6 +83,10 @@ module GroupDocsConversionCloud
         if (value = attributes[:'Pages']).is_a?(Array)
           self.pages = value
         end
+      end
+
+      if attributes.key?(:'WatermarkOptions')
+        self.watermark_options = attributes[:'WatermarkOptions']
       end
 
     end
@@ -112,7 +121,8 @@ module GroupDocsConversionCloud
       self.class == other.class &&
           from_page == other.from_page &&
           pages_count == other.pages_count &&
-          pages == other.pages
+          pages == other.pages &&
+          watermark_options == other.watermark_options
     end
 
     # @see the `==` method
@@ -124,7 +134,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages].hash
+      [from_page, pages_count, pages, watermark_options].hash
     end
 
     # Downcases first letter.

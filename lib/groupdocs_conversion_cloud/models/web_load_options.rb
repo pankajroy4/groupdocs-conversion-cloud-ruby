@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="svg_convert_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="web_load_options.rb">
  #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,63 +28,28 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Svg convert options
-  class SvgConvertOptions
+  # Html document load options
+  class WebLoadOptions
 
-    # Start conversion from FromPage page
-    attr_accessor :from_page
+    # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
+    attr_accessor :format
 
-    # Number of pages to convert
-    attr_accessor :pages_count
-
-    # Convert specific pages. The list contains the page indexes of the pages to be converted
-    attr_accessor :pages
-
-    # Desired image width after conversion
-    attr_accessor :width
-
-    # Desired image height after conversion
-    attr_accessor :height
-
-    # Convert to grayscale image
-    attr_accessor :grayscale
-
-    # Image rotation angle 
-    attr_accessor :rotate_angle
-
-    # If true, the input firstly is converted to PDF and after that to desired format
-    attr_accessor :use_pdf
-
-    # Watermark specific options
-    attr_accessor :watermark_options
+    # Enable or disable generation of page numbering in converted document. Default: false
+    attr_accessor :page_numbering
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'from_page' => :'FromPage',
-        :'pages_count' => :'PagesCount',
-        :'pages' => :'Pages',
-        :'width' => :'Width',
-        :'height' => :'Height',
-        :'grayscale' => :'Grayscale',
-        :'rotate_angle' => :'RotateAngle',
-        :'use_pdf' => :'UsePdf',
-        :'watermark_options' => :'WatermarkOptions'
+        :'format' => :'Format',
+        :'page_numbering' => :'PageNumbering'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'from_page' => :'Integer',
-        :'pages_count' => :'Integer',
-        :'pages' => :'Array<Integer>',
-        :'width' => :'Integer',
-        :'height' => :'Integer',
-        :'grayscale' => :'BOOLEAN',
-        :'rotate_angle' => :'Integer',
-        :'use_pdf' => :'BOOLEAN',
-        :'watermark_options' => :'WatermarkOptions'
+        :'format' => :'String',
+        :'page_numbering' => :'BOOLEAN'
       }
     end
 
@@ -96,42 +61,12 @@ module GroupDocsConversionCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FromPage')
-        self.from_page = attributes[:'FromPage']
+      if attributes.key?(:'Format')
+        self.format = attributes[:'Format']
       end
 
-      if attributes.key?(:'PagesCount')
-        self.pages_count = attributes[:'PagesCount']
-      end
-
-      if attributes.key?(:'Pages')
-        if (value = attributes[:'Pages']).is_a?(Array)
-          self.pages = value
-        end
-      end
-
-      if attributes.key?(:'Width')
-        self.width = attributes[:'Width']
-      end
-
-      if attributes.key?(:'Height')
-        self.height = attributes[:'Height']
-      end
-
-      if attributes.key?(:'Grayscale')
-        self.grayscale = attributes[:'Grayscale']
-      end
-
-      if attributes.key?(:'RotateAngle')
-        self.rotate_angle = attributes[:'RotateAngle']
-      end
-
-      if attributes.key?(:'UsePdf')
-        self.use_pdf = attributes[:'UsePdf']
-      end
-
-      if attributes.key?(:'WatermarkOptions')
-        self.watermark_options = attributes[:'WatermarkOptions']
+      if attributes.key?(:'PageNumbering')
+        self.page_numbering = attributes[:'PageNumbering']
       end
 
     end
@@ -140,32 +75,8 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @from_page.nil?
-        invalid_properties.push("invalid value for 'from_page', from_page cannot be nil.")
-      end
-
-      if @pages_count.nil?
-        invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
-      end
-
-      if @width.nil?
-        invalid_properties.push("invalid value for 'width', width cannot be nil.")
-      end
-
-      if @height.nil?
-        invalid_properties.push("invalid value for 'height', height cannot be nil.")
-      end
-
-      if @grayscale.nil?
-        invalid_properties.push("invalid value for 'grayscale', grayscale cannot be nil.")
-      end
-
-      if @rotate_angle.nil?
-        invalid_properties.push("invalid value for 'rotate_angle', rotate_angle cannot be nil.")
-      end
-
-      if @use_pdf.nil?
-        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
+      if @page_numbering.nil?
+        invalid_properties.push("invalid value for 'page_numbering', page_numbering cannot be nil.")
       end
 
       return invalid_properties
@@ -174,13 +85,7 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @from_page.nil?
-      return false if @pages_count.nil?
-      return false if @width.nil?
-      return false if @height.nil?
-      return false if @grayscale.nil?
-      return false if @rotate_angle.nil?
-      return false if @use_pdf.nil?
+      return false if @page_numbering.nil?
       return true
     end
 
@@ -189,15 +94,8 @@ module GroupDocsConversionCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          from_page == other.from_page &&
-          pages_count == other.pages_count &&
-          pages == other.pages &&
-          width == other.width &&
-          height == other.height &&
-          grayscale == other.grayscale &&
-          rotate_angle == other.rotate_angle &&
-          use_pdf == other.use_pdf &&
-          watermark_options == other.watermark_options
+          format == other.format &&
+          page_numbering == other.page_numbering
     end
 
     # @see the `==` method
@@ -209,7 +107,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, width, height, grayscale, rotate_angle, use_pdf, watermark_options].hash
+      [format, page_numbering].hash
     end
 
     # Downcases first letter.

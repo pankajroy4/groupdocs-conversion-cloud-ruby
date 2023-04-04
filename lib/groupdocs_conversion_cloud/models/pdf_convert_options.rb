@@ -40,6 +40,9 @@ module GroupDocsConversionCloud
     # Convert specific pages. The list contains the page indexes of the pages to be converted
     attr_accessor :pages
 
+    # Watermark specific options
+    attr_accessor :watermark_options
+
     # Desired page width in pixels after conversion
     attr_accessor :width
 
@@ -129,9 +132,6 @@ module GroupDocsConversionCloud
 
     # Rotate page
     attr_accessor :rotate
-
-    # Watermark specific options
-    attr_accessor :watermark_options
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -160,6 +160,7 @@ module GroupDocsConversionCloud
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
+        :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Width',
         :'height' => :'Height',
         :'dpi' => :'Dpi',
@@ -189,8 +190,7 @@ module GroupDocsConversionCloud
         :'non_full_screen_page_mode' => :'NonFullScreenPageMode',
         :'page_layout' => :'PageLayout',
         :'page_mode' => :'PageMode',
-        :'rotate' => :'Rotate',
-        :'watermark_options' => :'WatermarkOptions'
+        :'rotate' => :'Rotate'
       }
     end
 
@@ -200,6 +200,7 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
+        :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
         :'dpi' => :'Float',
@@ -229,8 +230,7 @@ module GroupDocsConversionCloud
         :'non_full_screen_page_mode' => :'String',
         :'page_layout' => :'String',
         :'page_mode' => :'String',
-        :'rotate' => :'String',
-        :'watermark_options' => :'WatermarkOptions'
+        :'rotate' => :'String'
       }
     end
 
@@ -254,6 +254,10 @@ module GroupDocsConversionCloud
         if (value = attributes[:'Pages']).is_a?(Array)
           self.pages = value
         end
+      end
+
+      if attributes.key?(:'WatermarkOptions')
+        self.watermark_options = attributes[:'WatermarkOptions']
       end
 
       if attributes.key?(:'Width')
@@ -374,10 +378,6 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'Rotate')
         self.rotate = attributes[:'Rotate']
-      end
-
-      if attributes.key?(:'WatermarkOptions')
-        self.watermark_options = attributes[:'WatermarkOptions']
       end
 
     end
@@ -654,6 +654,7 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
+          watermark_options == other.watermark_options &&
           width == other.width &&
           height == other.height &&
           dpi == other.dpi &&
@@ -683,8 +684,7 @@ module GroupDocsConversionCloud
           non_full_screen_page_mode == other.non_full_screen_page_mode &&
           page_layout == other.page_layout &&
           page_mode == other.page_mode &&
-          rotate == other.rotate &&
-          watermark_options == other.watermark_options
+          rotate == other.rotate
     end
 
     # @see the `==` method
@@ -696,7 +696,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, width, height, dpi, password, margin_top, margin_bottom, margin_left, margin_right, pdf_format, remove_pdfa_compliance, zoom, linearize, link_duplicate_streams, remove_unused_objects, remove_unused_streams, compress_images, image_quality, unembed_fonts, grayscale, center_window, direction, display_doc_title, fit_window, hide_menu_bar, hide_tool_bar, hide_window_ui, non_full_screen_page_mode, page_layout, page_mode, rotate, watermark_options].hash
+      [from_page, pages_count, pages, watermark_options, width, height, dpi, password, margin_top, margin_bottom, margin_left, margin_right, pdf_format, remove_pdfa_compliance, zoom, linearize, link_duplicate_streams, remove_unused_objects, remove_unused_streams, compress_images, image_quality, unembed_fonts, grayscale, center_window, direction, display_doc_title, fit_window, hide_menu_bar, hide_tool_bar, hide_window_ui, non_full_screen_page_mode, page_layout, page_mode, rotate].hash
     end
 
     # Downcases first letter.

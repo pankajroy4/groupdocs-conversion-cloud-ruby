@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="epub_convert_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="pdl_convert_options.rb">
  #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Epub convert options
-  class EpubConvertOptions
+  # Page description langusge convert options
+  class PDLConvertOptions
 
     # Start conversion from FromPage page
     attr_accessor :from_page
@@ -40,33 +40,6 @@ module GroupDocsConversionCloud
     # Convert specific pages. The list contains the page indexes of the pages to be converted
     attr_accessor :pages
 
-    # Desired page width in pixels after conversion
-    attr_accessor :width
-
-    # Desired page height in pixels after conversion
-    attr_accessor :height
-
-    # Desired page DPI after conversion. The default resolution is: 96dpi
-    attr_accessor :dpi
-
-    # Set this property if you want to protect the converted document with a password
-    attr_accessor :password
-
-    # Desired page top margin in pixels after conversion
-    attr_accessor :margin_top
-
-    # Desired page bottom margin in pixels after conversion
-    attr_accessor :margin_bottom
-
-    # Desired page left margin in pixels after conversion
-    attr_accessor :margin_left
-
-    # Desired page right margin in pixels after conversion
-    attr_accessor :margin_right
-
-    # If true, the input firstly is converted to PDF and after that to desired format
-    attr_accessor :use_pdf
-
     # Watermark specific options
     attr_accessor :watermark_options
 
@@ -76,15 +49,6 @@ module GroupDocsConversionCloud
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
-        :'width' => :'Width',
-        :'height' => :'Height',
-        :'dpi' => :'Dpi',
-        :'password' => :'Password',
-        :'margin_top' => :'MarginTop',
-        :'margin_bottom' => :'MarginBottom',
-        :'margin_left' => :'MarginLeft',
-        :'margin_right' => :'MarginRight',
-        :'use_pdf' => :'UsePdf',
         :'watermark_options' => :'WatermarkOptions'
       }
     end
@@ -95,15 +59,6 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
-        :'width' => :'Integer',
-        :'height' => :'Integer',
-        :'dpi' => :'Float',
-        :'password' => :'String',
-        :'margin_top' => :'Integer',
-        :'margin_bottom' => :'Integer',
-        :'margin_left' => :'Integer',
-        :'margin_right' => :'Integer',
-        :'use_pdf' => :'BOOLEAN',
         :'watermark_options' => :'WatermarkOptions'
       }
     end
@@ -130,42 +85,6 @@ module GroupDocsConversionCloud
         end
       end
 
-      if attributes.key?(:'Width')
-        self.width = attributes[:'Width']
-      end
-
-      if attributes.key?(:'Height')
-        self.height = attributes[:'Height']
-      end
-
-      if attributes.key?(:'Dpi')
-        self.dpi = attributes[:'Dpi']
-      end
-
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
-      end
-
-      if attributes.key?(:'MarginTop')
-        self.margin_top = attributes[:'MarginTop']
-      end
-
-      if attributes.key?(:'MarginBottom')
-        self.margin_bottom = attributes[:'MarginBottom']
-      end
-
-      if attributes.key?(:'MarginLeft')
-        self.margin_left = attributes[:'MarginLeft']
-      end
-
-      if attributes.key?(:'MarginRight')
-        self.margin_right = attributes[:'MarginRight']
-      end
-
-      if attributes.key?(:'UsePdf')
-        self.use_pdf = attributes[:'UsePdf']
-      end
-
       if attributes.key?(:'WatermarkOptions')
         self.watermark_options = attributes[:'WatermarkOptions']
       end
@@ -184,38 +103,6 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
       end
 
-      if @width.nil?
-        invalid_properties.push("invalid value for 'width', width cannot be nil.")
-      end
-
-      if @height.nil?
-        invalid_properties.push("invalid value for 'height', height cannot be nil.")
-      end
-
-      if @dpi.nil?
-        invalid_properties.push("invalid value for 'dpi', dpi cannot be nil.")
-      end
-
-      if @margin_top.nil?
-        invalid_properties.push("invalid value for 'margin_top', margin_top cannot be nil.")
-      end
-
-      if @margin_bottom.nil?
-        invalid_properties.push("invalid value for 'margin_bottom', margin_bottom cannot be nil.")
-      end
-
-      if @margin_left.nil?
-        invalid_properties.push("invalid value for 'margin_left', margin_left cannot be nil.")
-      end
-
-      if @margin_right.nil?
-        invalid_properties.push("invalid value for 'margin_right', margin_right cannot be nil.")
-      end
-
-      if @use_pdf.nil?
-        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -224,14 +111,6 @@ module GroupDocsConversionCloud
     def valid?
       return false if @from_page.nil?
       return false if @pages_count.nil?
-      return false if @width.nil?
-      return false if @height.nil?
-      return false if @dpi.nil?
-      return false if @margin_top.nil?
-      return false if @margin_bottom.nil?
-      return false if @margin_left.nil?
-      return false if @margin_right.nil?
-      return false if @use_pdf.nil?
       return true
     end
 
@@ -243,15 +122,6 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
-          width == other.width &&
-          height == other.height &&
-          dpi == other.dpi &&
-          password == other.password &&
-          margin_top == other.margin_top &&
-          margin_bottom == other.margin_bottom &&
-          margin_left == other.margin_left &&
-          margin_right == other.margin_right &&
-          use_pdf == other.use_pdf &&
           watermark_options == other.watermark_options
     end
 
@@ -264,7 +134,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, width, height, dpi, password, margin_top, margin_bottom, margin_left, margin_right, use_pdf, watermark_options].hash
+      [from_page, pages_count, pages, watermark_options].hash
     end
 
     # Downcases first letter.

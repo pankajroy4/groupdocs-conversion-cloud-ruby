@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="html_load_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="web_convert_options.rb">
  #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,28 +28,58 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Html document load options
-  class HtmlLoadOptions
+  # Options for to Html conversion
+  class WebConvertOptions
 
-    # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
-    attr_accessor :format
+    # Start conversion from FromPage page
+    attr_accessor :from_page
 
-    # Enable or disable generation of page numbering in converted document. Default: false
-    attr_accessor :page_numbering
+    # Number of pages to convert
+    attr_accessor :pages_count
+
+    # Convert specific pages. The list contains the page indexes of the pages to be converted
+    attr_accessor :pages
+
+    # Watermark specific options
+    attr_accessor :watermark_options
+
+    # If true, the input firstly is converted to PDF and after that to desired format
+    attr_accessor :use_pdf
+
+    # If true fixed layout will be used e.g. absolutely positioned html elements Default:  true
+    attr_accessor :fixed_layout
+
+    # Show page borders when converting to fixed layout. Default is True
+    attr_accessor :fixed_layout_show_borders
+
+    # Specifies the zoom level in percentage. Default is 100.
+    attr_accessor :zoom
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'format' => :'Format',
-        :'page_numbering' => :'PageNumbering'
+        :'from_page' => :'FromPage',
+        :'pages_count' => :'PagesCount',
+        :'pages' => :'Pages',
+        :'watermark_options' => :'WatermarkOptions',
+        :'use_pdf' => :'UsePdf',
+        :'fixed_layout' => :'FixedLayout',
+        :'fixed_layout_show_borders' => :'FixedLayoutShowBorders',
+        :'zoom' => :'Zoom'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'format' => :'String',
-        :'page_numbering' => :'BOOLEAN'
+        :'from_page' => :'Integer',
+        :'pages_count' => :'Integer',
+        :'pages' => :'Array<Integer>',
+        :'watermark_options' => :'WatermarkOptions',
+        :'use_pdf' => :'BOOLEAN',
+        :'fixed_layout' => :'BOOLEAN',
+        :'fixed_layout_show_borders' => :'BOOLEAN',
+        :'zoom' => :'Integer'
       }
     end
 
@@ -61,12 +91,38 @@ module GroupDocsConversionCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Format')
-        self.format = attributes[:'Format']
+      if attributes.key?(:'FromPage')
+        self.from_page = attributes[:'FromPage']
       end
 
-      if attributes.key?(:'PageNumbering')
-        self.page_numbering = attributes[:'PageNumbering']
+      if attributes.key?(:'PagesCount')
+        self.pages_count = attributes[:'PagesCount']
+      end
+
+      if attributes.key?(:'Pages')
+        if (value = attributes[:'Pages']).is_a?(Array)
+          self.pages = value
+        end
+      end
+
+      if attributes.key?(:'WatermarkOptions')
+        self.watermark_options = attributes[:'WatermarkOptions']
+      end
+
+      if attributes.key?(:'UsePdf')
+        self.use_pdf = attributes[:'UsePdf']
+      end
+
+      if attributes.key?(:'FixedLayout')
+        self.fixed_layout = attributes[:'FixedLayout']
+      end
+
+      if attributes.key?(:'FixedLayoutShowBorders')
+        self.fixed_layout_show_borders = attributes[:'FixedLayoutShowBorders']
+      end
+
+      if attributes.key?(:'Zoom')
+        self.zoom = attributes[:'Zoom']
       end
 
     end
@@ -75,8 +131,28 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @page_numbering.nil?
-        invalid_properties.push("invalid value for 'page_numbering', page_numbering cannot be nil.")
+      if @from_page.nil?
+        invalid_properties.push("invalid value for 'from_page', from_page cannot be nil.")
+      end
+
+      if @pages_count.nil?
+        invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
+      end
+
+      if @use_pdf.nil?
+        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
+      end
+
+      if @fixed_layout.nil?
+        invalid_properties.push("invalid value for 'fixed_layout', fixed_layout cannot be nil.")
+      end
+
+      if @fixed_layout_show_borders.nil?
+        invalid_properties.push("invalid value for 'fixed_layout_show_borders', fixed_layout_show_borders cannot be nil.")
+      end
+
+      if @zoom.nil?
+        invalid_properties.push("invalid value for 'zoom', zoom cannot be nil.")
       end
 
       return invalid_properties
@@ -85,7 +161,12 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @page_numbering.nil?
+      return false if @from_page.nil?
+      return false if @pages_count.nil?
+      return false if @use_pdf.nil?
+      return false if @fixed_layout.nil?
+      return false if @fixed_layout_show_borders.nil?
+      return false if @zoom.nil?
       return true
     end
 
@@ -94,8 +175,14 @@ module GroupDocsConversionCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          format == other.format &&
-          page_numbering == other.page_numbering
+          from_page == other.from_page &&
+          pages_count == other.pages_count &&
+          pages == other.pages &&
+          watermark_options == other.watermark_options &&
+          use_pdf == other.use_pdf &&
+          fixed_layout == other.fixed_layout &&
+          fixed_layout_show_borders == other.fixed_layout_show_borders &&
+          zoom == other.zoom
     end
 
     # @see the `==` method
@@ -107,7 +194,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, page_numbering].hash
+      [from_page, pages_count, pages, watermark_options, use_pdf, fixed_layout, fixed_layout_show_borders, zoom].hash
     end
 
     # Downcases first letter.

@@ -40,6 +40,9 @@ module GroupDocsConversionCloud
     # Convert specific pages. The list contains the page indexes of the pages to be converted
     attr_accessor :pages
 
+    # Watermark specific options
+    attr_accessor :watermark_options
+
     # Desired page width after conversion
     attr_accessor :width
 
@@ -54,9 +57,6 @@ module GroupDocsConversionCloud
 
     # Specifies the zoom level in percentage. Default is 100. Default zoom is supported till Microsoft Word 2010. Starting from Microsoft Word 2013 default zoom is no longer set to document, instead it appears to use the zoom factor of the last document that was opened.
     attr_accessor :zoom
-
-    # Watermark specific options
-    attr_accessor :watermark_options
 
     # Recognition mode when converting from pdf
     attr_accessor :pdf_recognition_mode
@@ -94,12 +94,12 @@ module GroupDocsConversionCloud
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
+        :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Width',
         :'height' => :'Height',
         :'dpi' => :'Dpi',
         :'password' => :'Password',
         :'zoom' => :'Zoom',
-        :'watermark_options' => :'WatermarkOptions',
         :'pdf_recognition_mode' => :'PdfRecognitionMode',
         :'page_size' => :'PageSize',
         :'page_orientation' => :'PageOrientation'
@@ -112,12 +112,12 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
+        :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
         :'dpi' => :'Float',
         :'password' => :'String',
         :'zoom' => :'Integer',
-        :'watermark_options' => :'WatermarkOptions',
         :'pdf_recognition_mode' => :'String',
         :'page_size' => :'String',
         :'page_orientation' => :'String'
@@ -146,6 +146,10 @@ module GroupDocsConversionCloud
         end
       end
 
+      if attributes.key?(:'WatermarkOptions')
+        self.watermark_options = attributes[:'WatermarkOptions']
+      end
+
       if attributes.key?(:'Width')
         self.width = attributes[:'Width']
       end
@@ -164,10 +168,6 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'Zoom')
         self.zoom = attributes[:'Zoom']
-      end
-
-      if attributes.key?(:'WatermarkOptions')
-        self.watermark_options = attributes[:'WatermarkOptions']
       end
 
       if attributes.key?(:'PdfRecognitionMode')
@@ -298,12 +298,12 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
+          watermark_options == other.watermark_options &&
           width == other.width &&
           height == other.height &&
           dpi == other.dpi &&
           password == other.password &&
           zoom == other.zoom &&
-          watermark_options == other.watermark_options &&
           pdf_recognition_mode == other.pdf_recognition_mode &&
           page_size == other.page_size &&
           page_orientation == other.page_orientation
@@ -318,7 +318,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, width, height, dpi, password, zoom, watermark_options, pdf_recognition_mode, page_size, page_orientation].hash
+      [from_page, pages_count, pages, watermark_options, width, height, dpi, password, zoom, pdf_recognition_mode, page_size, page_orientation].hash
     end
 
     # Downcases first letter.

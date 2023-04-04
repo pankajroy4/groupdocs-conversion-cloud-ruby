@@ -40,14 +40,14 @@ module GroupDocsConversionCloud
     # Convert specific pages. The list contains the page indexes of the pages to be converted
     attr_accessor :pages
 
+    # Watermark specific options
+    attr_accessor :watermark_options
+
     # Set this property if you want to protect the converted document with a password
     attr_accessor :password
 
     # Specifies the zoom level in percentage. Default is 100. Default zoom is supported till Microsoft Powerpoint 2010. Starting from Microsoft Powerpoint 2013 default zoom is no longer set to document, instead it appears to use the zoom factor of the last document that was opened.
     attr_accessor :zoom
-
-    # Watermark specific options
-    attr_accessor :watermark_options
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -55,9 +55,9 @@ module GroupDocsConversionCloud
         :'from_page' => :'FromPage',
         :'pages_count' => :'PagesCount',
         :'pages' => :'Pages',
+        :'watermark_options' => :'WatermarkOptions',
         :'password' => :'Password',
-        :'zoom' => :'Zoom',
-        :'watermark_options' => :'WatermarkOptions'
+        :'zoom' => :'Zoom'
       }
     end
 
@@ -67,9 +67,9 @@ module GroupDocsConversionCloud
         :'from_page' => :'Integer',
         :'pages_count' => :'Integer',
         :'pages' => :'Array<Integer>',
+        :'watermark_options' => :'WatermarkOptions',
         :'password' => :'String',
-        :'zoom' => :'Integer',
-        :'watermark_options' => :'WatermarkOptions'
+        :'zoom' => :'Integer'
       }
     end
 
@@ -95,16 +95,16 @@ module GroupDocsConversionCloud
         end
       end
 
+      if attributes.key?(:'WatermarkOptions')
+        self.watermark_options = attributes[:'WatermarkOptions']
+      end
+
       if attributes.key?(:'Password')
         self.password = attributes[:'Password']
       end
 
       if attributes.key?(:'Zoom')
         self.zoom = attributes[:'Zoom']
-      end
-
-      if attributes.key?(:'WatermarkOptions')
-        self.watermark_options = attributes[:'WatermarkOptions']
       end
 
     end
@@ -145,9 +145,9 @@ module GroupDocsConversionCloud
           from_page == other.from_page &&
           pages_count == other.pages_count &&
           pages == other.pages &&
+          watermark_options == other.watermark_options &&
           password == other.password &&
-          zoom == other.zoom &&
-          watermark_options == other.watermark_options
+          zoom == other.zoom
     end
 
     # @see the `==` method
@@ -159,7 +159,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, password, zoom, watermark_options].hash
+      [from_page, pages_count, pages, watermark_options, password, zoom].hash
     end
 
     # Downcases first letter.
