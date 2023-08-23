@@ -25,11 +25,13 @@
 
 # Common files
 require_relative 'groupdocs_conversion_cloud/api_client'
-require_relative 'groupdocs_conversion_cloud/api_error'
+require_relative 'groupdocs_conversion_cloud/api_client_error'
 require_relative 'groupdocs_conversion_cloud/version'
 require_relative 'groupdocs_conversion_cloud/configuration'
 
 # Models
+require_relative 'groupdocs_conversion_cloud/models/api_error'
+require_relative 'groupdocs_conversion_cloud/models/api_error_response'
 require_relative 'groupdocs_conversion_cloud/models/consumption_result'
 require_relative 'groupdocs_conversion_cloud/models/convert_options'
 require_relative 'groupdocs_conversion_cloud/models/convert_settings'

@@ -25,18 +25,17 @@
 
 module GroupDocsConversionCloud
   #
-  # ApiError class for error handling
+  # ApiClientError class for error handling
   #
-  class ApiError < StandardError
+  class ApiClientError < StandardError
     attr_reader :code
     attr_reader :message
 
     # Usage examples:
-    #   ApiError.new
-    #   ApiError.new(:code => 500, :response_body => "")
-    def initialize(arg = nil)
-      if arg.is_a? Hash
-        
+    #   ApiClientError.new
+    #   ApiClientError.new(:code => 500, :response_body => "")
+    def initialize(arg = nil)      
+      if arg.is_a? Hash        
         if arg.key?(:response_body) then
           data = JSON.parse(arg[:response_body], :symbolize_names => true)
           if !data.nil? then
@@ -69,3 +68,4 @@ module GroupDocsConversionCloud
     end
   end
 end
+

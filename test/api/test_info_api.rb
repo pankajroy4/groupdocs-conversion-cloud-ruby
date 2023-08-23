@@ -55,7 +55,7 @@ module GroupDocsConversionCloud
 
     def test_GetInfoReturnsFileNotFound
       request = GetDocumentMetadataRequest.new(TestFile.not_exist.path)
-      error = assert_raises ApiError do
+      error = assert_raises ApiClientError do
         @info_api.get_document_metadata(request)
       end
       assert_equal true, error.message.include?("AmazonS3 Storage exception: The specified key does not exist.")

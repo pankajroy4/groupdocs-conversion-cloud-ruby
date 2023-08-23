@@ -31,7 +31,7 @@ require 'faraday'
 require 'mimemagic'
 require 'addressable'
 require_relative 'version'
-require_relative 'api_error'
+require_relative 'api_client_error'
 
 module GroupDocsConversionCloud
   #
@@ -69,7 +69,7 @@ module GroupDocsConversionCloud
       end
 
       unless response.success?
-        raise ApiError.new(:code => response.status, :response_body => response.body)
+        raise ApiClientError.new(:code => response.status, :response_body => response.body)
       end
       
       data = deserialize(response, opts[:return_type]) if opts[:return_type]
