@@ -113,6 +113,55 @@ module GroupDocsConversionCloud
       [data, status_code, headers]
     end
 
+    # Get license information
+    # 
+    # @return [LicenseInfo]
+    def get_license_info()
+      data, _status_code, _headers = get_license_info_with_http_info()
+      data
+    end
+
+    # Get license information
+    # 
+    
+    # @return [Array<(LicenseInfo, Fixnum, Hash)>]
+    # LicenseInfo data, response status code and response headers
+    def get_license_info_with_http_info()
+      
+
+      @api_client.config.logger.debug 'Calling API: LicenseApi.get_license_info ...' if @api_client.config.debugging
+      # resource path
+      local_var_path = '/conversion/license'
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+                                                        header_params: header_params,
+                                                        query_params: query_params,
+                                                        form_params: form_params,
+                                                        body: post_body,
+                                                        access_token: get_access_token,
+                                                        return_type: 'LicenseInfo')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called:
+        LicenseApi#get_license_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      [data, status_code, headers]
+    end
+
     #
     # Helper method to convert first letter to downcase
     #
