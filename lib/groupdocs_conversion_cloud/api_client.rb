@@ -28,7 +28,6 @@ require 'json'
 require 'logger'
 require 'tempfile'
 require 'faraday'
-require 'mimemagic'
 require 'addressable'
 require_relative 'version'
 require_relative 'api_client_error'
@@ -281,7 +280,7 @@ module GroupDocsConversionCloud
         form_params.each do |key, value|
           case value
           when ::File
-            data[key] = Faraday::UploadIO.new(value.path, MimeMagic.by_magic(value).to_s, key)
+            data[key] = Faraday::UploadIO.new(value.path, "application/octet-stream", key)
           when ::Array, nil
             data[key] = value
           else

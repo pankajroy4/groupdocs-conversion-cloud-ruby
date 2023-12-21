@@ -34,6 +34,33 @@ module GroupDocsConversionCloud
     # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
     attr_accessor :format
 
+    # Default font for Cells document. The following font will be used if a font is missing.
+    attr_accessor :default_font
+
+    # Substitute specific fonts when converting Cells document.
+    attr_accessor :font_substitutes
+
+    # Show grid lines when converting Excel files
+    attr_accessor :show_grid_lines
+
+    # Show hidden sheets when converting Excel files
+    attr_accessor :show_hidden_sheets
+
+    # If OnePagePerSheet is true the content of the sheet will be converted to one page in the PDF document. Default value is true.
+    attr_accessor :one_page_per_sheet
+
+    # Convert specific range when converting to other than cells format. Example: \"D1:F8\"
+    attr_accessor :convert_range
+
+    # Skips empty rows and columns when converting. Default is True.
+    attr_accessor :skip_empty_rows_and_columns
+
+    # Set password to unprotect protected document
+    attr_accessor :password
+
+    # Hide comments
+    attr_accessor :hide_comments
+
     # Delimiter of a Csv file
     attr_accessor :separator
 
@@ -56,6 +83,15 @@ module GroupDocsConversionCloud
     def self.attribute_map
       {
         :'format' => :'Format',
+        :'default_font' => :'DefaultFont',
+        :'font_substitutes' => :'FontSubstitutes',
+        :'show_grid_lines' => :'ShowGridLines',
+        :'show_hidden_sheets' => :'ShowHiddenSheets',
+        :'one_page_per_sheet' => :'OnePagePerSheet',
+        :'convert_range' => :'ConvertRange',
+        :'skip_empty_rows_and_columns' => :'SkipEmptyRowsAndColumns',
+        :'password' => :'Password',
+        :'hide_comments' => :'HideComments',
         :'separator' => :'Separator',
         :'is_multi_encoded' => :'IsMultiEncoded',
         :'has_formula' => :'HasFormula',
@@ -69,6 +105,15 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'format' => :'String',
+        :'default_font' => :'String',
+        :'font_substitutes' => :'Hash<String, String>',
+        :'show_grid_lines' => :'BOOLEAN',
+        :'show_hidden_sheets' => :'BOOLEAN',
+        :'one_page_per_sheet' => :'BOOLEAN',
+        :'convert_range' => :'String',
+        :'skip_empty_rows_and_columns' => :'BOOLEAN',
+        :'password' => :'String',
+        :'hide_comments' => :'BOOLEAN',
         :'separator' => :'String',
         :'is_multi_encoded' => :'BOOLEAN',
         :'has_formula' => :'BOOLEAN',
@@ -88,6 +133,44 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'Format')
         self.format = attributes[:'Format']
+      end
+
+      if attributes.key?(:'DefaultFont')
+        self.default_font = attributes[:'DefaultFont']
+      end
+
+      if attributes.key?(:'FontSubstitutes')
+        if (value = attributes[:'FontSubstitutes']).is_a?(Hash)
+          self.font_substitutes = value
+        end
+      end
+
+      if attributes.key?(:'ShowGridLines')
+        self.show_grid_lines = attributes[:'ShowGridLines']
+      end
+
+      if attributes.key?(:'ShowHiddenSheets')
+        self.show_hidden_sheets = attributes[:'ShowHiddenSheets']
+      end
+
+      if attributes.key?(:'OnePagePerSheet')
+        self.one_page_per_sheet = attributes[:'OnePagePerSheet']
+      end
+
+      if attributes.key?(:'ConvertRange')
+        self.convert_range = attributes[:'ConvertRange']
+      end
+
+      if attributes.key?(:'SkipEmptyRowsAndColumns')
+        self.skip_empty_rows_and_columns = attributes[:'SkipEmptyRowsAndColumns']
+      end
+
+      if attributes.key?(:'Password')
+        self.password = attributes[:'Password']
+      end
+
+      if attributes.key?(:'HideComments')
+        self.hide_comments = attributes[:'HideComments']
       end
 
       if attributes.key?(:'Separator')
@@ -120,6 +203,26 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @show_grid_lines.nil?
+        invalid_properties.push("invalid value for 'show_grid_lines', show_grid_lines cannot be nil.")
+      end
+
+      if @show_hidden_sheets.nil?
+        invalid_properties.push("invalid value for 'show_hidden_sheets', show_hidden_sheets cannot be nil.")
+      end
+
+      if @one_page_per_sheet.nil?
+        invalid_properties.push("invalid value for 'one_page_per_sheet', one_page_per_sheet cannot be nil.")
+      end
+
+      if @skip_empty_rows_and_columns.nil?
+        invalid_properties.push("invalid value for 'skip_empty_rows_and_columns', skip_empty_rows_and_columns cannot be nil.")
+      end
+
+      if @hide_comments.nil?
+        invalid_properties.push("invalid value for 'hide_comments', hide_comments cannot be nil.")
+      end
+
       if @separator.nil?
         invalid_properties.push("invalid value for 'separator', separator cannot be nil.")
       end
@@ -146,6 +249,11 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @show_grid_lines.nil?
+      return false if @show_hidden_sheets.nil?
+      return false if @one_page_per_sheet.nil?
+      return false if @skip_empty_rows_and_columns.nil?
+      return false if @hide_comments.nil?
       return false if @separator.nil?
       return false if @is_multi_encoded.nil?
       return false if @has_formula.nil?
@@ -160,6 +268,15 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           format == other.format &&
+          default_font == other.default_font &&
+          font_substitutes == other.font_substitutes &&
+          show_grid_lines == other.show_grid_lines &&
+          show_hidden_sheets == other.show_hidden_sheets &&
+          one_page_per_sheet == other.one_page_per_sheet &&
+          convert_range == other.convert_range &&
+          skip_empty_rows_and_columns == other.skip_empty_rows_and_columns &&
+          password == other.password &&
+          hide_comments == other.hide_comments &&
           separator == other.separator &&
           is_multi_encoded == other.is_multi_encoded &&
           has_formula == other.has_formula &&
@@ -177,7 +294,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, separator, is_multi_encoded, has_formula, convert_numeric_data, convert_date_time_data, encoding].hash
+      [format, default_font, font_substitutes, show_grid_lines, show_hidden_sheets, one_page_per_sheet, convert_range, skip_empty_rows_and_columns, password, hide_comments, separator, is_multi_encoded, has_formula, convert_numeric_data, convert_date_time_data, encoding].hash
     end
 
     # Downcases first letter.
