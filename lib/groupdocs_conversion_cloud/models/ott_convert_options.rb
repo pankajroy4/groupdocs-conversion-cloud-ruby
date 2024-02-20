@@ -115,7 +115,7 @@ module GroupDocsConversionCloud
         :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'dpi' => :'Float',
+        :'dpi' => :'Integer',
         :'password' => :'String',
         :'zoom' => :'Integer',
         :'pdf_recognition_mode' => :'String',

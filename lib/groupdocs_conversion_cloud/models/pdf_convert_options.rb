@@ -132,6 +132,12 @@ module GroupDocsConversionCloud
 
     # Rotate page
     attr_accessor :rotate
+
+    # Specifies page size
+    attr_accessor :page_size
+
+    # Specifies page orientation
+    attr_accessor :page_orientation
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -190,7 +196,9 @@ module GroupDocsConversionCloud
         :'non_full_screen_page_mode' => :'NonFullScreenPageMode',
         :'page_layout' => :'PageLayout',
         :'page_mode' => :'PageMode',
-        :'rotate' => :'Rotate'
+        :'rotate' => :'Rotate',
+        :'page_size' => :'PageSize',
+        :'page_orientation' => :'PageOrientation'
       }
     end
 
@@ -203,7 +211,7 @@ module GroupDocsConversionCloud
         :'watermark_options' => :'WatermarkOptions',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'dpi' => :'Float',
+        :'dpi' => :'Integer',
         :'password' => :'String',
         :'margin_top' => :'Integer',
         :'margin_bottom' => :'Integer',
@@ -230,7 +238,9 @@ module GroupDocsConversionCloud
         :'non_full_screen_page_mode' => :'String',
         :'page_layout' => :'String',
         :'page_mode' => :'String',
-        :'rotate' => :'String'
+        :'rotate' => :'String',
+        :'page_size' => :'String',
+        :'page_orientation' => :'String'
       }
     end
 
@@ -380,6 +390,14 @@ module GroupDocsConversionCloud
         self.rotate = attributes[:'Rotate']
       end
 
+      if attributes.key?(:'PageSize')
+        self.page_size = attributes[:'PageSize']
+      end
+
+      if attributes.key?(:'PageOrientation')
+        self.page_orientation = attributes[:'PageOrientation']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -510,6 +528,14 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'rotate', rotate cannot be nil.")
       end
 
+      if @page_size.nil?
+        invalid_properties.push("invalid value for 'page_size', page_size cannot be nil.")
+      end
+
+      if @page_orientation.nil?
+        invalid_properties.push("invalid value for 'page_orientation', page_orientation cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -559,6 +585,12 @@ module GroupDocsConversionCloud
       return false if @rotate.nil?
       rotate_validator = EnumAttributeValidator.new('String', ["None", "On90", "On180", "On270"])
       return false unless rotate_validator.valid?(@rotate)
+      return false if @page_size.nil?
+      page_size_validator = EnumAttributeValidator.new('String', ["Default", "A3", "Statement", "Quarto", "Paper11x17", "Paper10x14", "Letter", "Legal", "Ledger", "Folio", "Executive", "EnvelopeDL", "Custom", "B5", "B4", "A5", "A4", "Tabloid"])
+      return false unless page_size_validator.valid?(@page_size)
+      return false if @page_orientation.nil?
+      page_orientation_validator = EnumAttributeValidator.new('String', ["Default", "Landscape", "Portrait"])
+      return false unless page_orientation_validator.valid?(@page_orientation)
       return true
     end
 
@@ -646,6 +678,34 @@ module GroupDocsConversionCloud
       end
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] page_size Object to be assigned
+    def page_size=(page_size)
+      validator = EnumAttributeValidator.new('String', ["Default", "A3", "Statement", "Quarto", "Paper11x17", "Paper10x14", "Letter", "Legal", "Ledger", "Folio", "Executive", "EnvelopeDL", "Custom", "B5", "B4", "A5", "A4", "Tabloid"])
+      if page_size.to_i == 0
+        unless validator.valid?(page_size)
+          raise ArgumentError, "invalid value for 'page_size', must be one of #{validator.allowable_values}."
+        end
+        @page_size = page_size
+      else
+        @page_size = validator.allowable_values[page_size.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] page_orientation Object to be assigned
+    def page_orientation=(page_orientation)
+      validator = EnumAttributeValidator.new('String', ["Default", "Landscape", "Portrait"])
+      if page_orientation.to_i == 0
+        unless validator.valid?(page_orientation)
+          raise ArgumentError, "invalid value for 'page_orientation', must be one of #{validator.allowable_values}."
+        end
+        @page_orientation = page_orientation
+      else
+        @page_orientation = validator.allowable_values[page_orientation.to_i]
+      end
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(other)
@@ -684,7 +744,9 @@ module GroupDocsConversionCloud
           non_full_screen_page_mode == other.non_full_screen_page_mode &&
           page_layout == other.page_layout &&
           page_mode == other.page_mode &&
-          rotate == other.rotate
+          rotate == other.rotate &&
+          page_size == other.page_size &&
+          page_orientation == other.page_orientation
     end
 
     # @see the `==` method
@@ -696,7 +758,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_page, pages_count, pages, watermark_options, width, height, dpi, password, margin_top, margin_bottom, margin_left, margin_right, pdf_format, remove_pdfa_compliance, zoom, linearize, link_duplicate_streams, remove_unused_objects, remove_unused_streams, compress_images, image_quality, unembed_fonts, grayscale, center_window, direction, display_doc_title, fit_window, hide_menu_bar, hide_tool_bar, hide_window_ui, non_full_screen_page_mode, page_layout, page_mode, rotate].hash
+      [from_page, pages_count, pages, watermark_options, width, height, dpi, password, margin_top, margin_bottom, margin_left, margin_right, pdf_format, remove_pdfa_compliance, zoom, linearize, link_duplicate_streams, remove_unused_objects, remove_unused_streams, compress_images, image_quality, unembed_fonts, grayscale, center_window, direction, display_doc_title, fit_window, hide_menu_bar, hide_tool_bar, hide_window_ui, non_full_screen_page_mode, page_layout, page_mode, rotate, page_size, page_orientation].hash
     end
 
     # Downcases first letter.
