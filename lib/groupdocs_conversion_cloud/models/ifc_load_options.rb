@@ -34,22 +34,43 @@ module GroupDocsConversionCloud
     # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
     attr_accessor :format
 
-    # Set desired page width for converting CAD document
-    attr_accessor :width
-
-    # Set desired page height for converting CAD document
-    attr_accessor :height
-
     # Render specific CAD layouts
     attr_accessor :layout_names
+
+    # Gets or sets a background color.
+    attr_accessor :background_color
+
+    # Gets or sets type of drawing.
+    attr_accessor :draw_type
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'format' => :'Format',
-        :'width' => :'Width',
-        :'height' => :'Height',
-        :'layout_names' => :'LayoutNames'
+        :'layout_names' => :'LayoutNames',
+        :'background_color' => :'BackgroundColor',
+        :'draw_type' => :'DrawType'
       }
     end
 
@@ -57,9 +78,9 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'format' => :'String',
-        :'width' => :'Integer',
-        :'height' => :'Integer',
-        :'layout_names' => :'Array<String>'
+        :'layout_names' => :'Array<String>',
+        :'background_color' => :'String',
+        :'draw_type' => :'String'
       }
     end
 
@@ -75,18 +96,18 @@ module GroupDocsConversionCloud
         self.format = attributes[:'Format']
       end
 
-      if attributes.key?(:'Width')
-        self.width = attributes[:'Width']
-      end
-
-      if attributes.key?(:'Height')
-        self.height = attributes[:'Height']
-      end
-
       if attributes.key?(:'LayoutNames')
         if (value = attributes[:'LayoutNames']).is_a?(Array)
           self.layout_names = value
         end
+      end
+
+      if attributes.key?(:'BackgroundColor')
+        self.background_color = attributes[:'BackgroundColor']
+      end
+
+      if attributes.key?(:'DrawType')
+        self.draw_type = attributes[:'DrawType']
       end
 
     end
@@ -95,12 +116,8 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @width.nil?
-        invalid_properties.push("invalid value for 'width', width cannot be nil.")
-      end
-
-      if @height.nil?
-        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      if @draw_type.nil?
+        invalid_properties.push("invalid value for 'draw_type', draw_type cannot be nil.")
       end
 
       return invalid_properties
@@ -109,9 +126,24 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @width.nil?
-      return false if @height.nil?
+      return false if @draw_type.nil?
+      draw_type_validator = EnumAttributeValidator.new('String', ["UseDrawColor", "UseObjectColor"])
+      return false unless draw_type_validator.valid?(@draw_type)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] draw_type Object to be assigned
+    def draw_type=(draw_type)
+      validator = EnumAttributeValidator.new('String', ["UseDrawColor", "UseObjectColor"])
+      if draw_type.to_i == 0
+        unless validator.valid?(draw_type)
+          raise ArgumentError, "invalid value for 'draw_type', must be one of #{validator.allowable_values}."
+        end
+        @draw_type = draw_type
+      else
+        @draw_type = validator.allowable_values[draw_type.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -120,9 +152,9 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           format == other.format &&
-          width == other.width &&
-          height == other.height &&
-          layout_names == other.layout_names
+          layout_names == other.layout_names &&
+          background_color == other.background_color &&
+          draw_type == other.draw_type
     end
 
     # @see the `==` method
@@ -134,7 +166,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, width, height, layout_names].hash
+      [format, layout_names, background_color, draw_type].hash
     end
 
     # Downcases first letter.

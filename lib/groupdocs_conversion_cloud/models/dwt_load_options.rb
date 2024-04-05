@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="plt_load_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="dwt_load_options.rb">
  #   Copyright (c) 2003-2024 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Plt load options
-  class PltLoadOptions
+  # Dwt load options
+  class DwtLoadOptions
 
     # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
     attr_accessor :format
