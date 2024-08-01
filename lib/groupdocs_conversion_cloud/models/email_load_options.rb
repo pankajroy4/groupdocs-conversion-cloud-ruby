@@ -40,9 +40,6 @@ module GroupDocsConversionCloud
     # Option to display or hide \"from\" email address. Default: true
     attr_accessor :display_from_email_address
 
-    # Option to display or hide email address. Default: true
-    attr_accessor :display_email_address
-
     # Option to display or hide \"to\" email address. Default: true
     attr_accessor :display_to_email_address
 
@@ -70,7 +67,6 @@ module GroupDocsConversionCloud
         :'format' => :'Format',
         :'display_header' => :'DisplayHeader',
         :'display_from_email_address' => :'DisplayFromEmailAddress',
-        :'display_email_address' => :'DisplayEmailAddress',
         :'display_to_email_address' => :'DisplayToEmailAddress',
         :'display_cc_email_address' => :'DisplayCcEmailAddress',
         :'display_bcc_email_address' => :'DisplayBccEmailAddress',
@@ -87,7 +83,6 @@ module GroupDocsConversionCloud
         :'format' => :'String',
         :'display_header' => :'BOOLEAN',
         :'display_from_email_address' => :'BOOLEAN',
-        :'display_email_address' => :'BOOLEAN',
         :'display_to_email_address' => :'BOOLEAN',
         :'display_cc_email_address' => :'BOOLEAN',
         :'display_bcc_email_address' => :'BOOLEAN',
@@ -116,10 +111,6 @@ module GroupDocsConversionCloud
 
       if attributes.key?(:'DisplayFromEmailAddress')
         self.display_from_email_address = attributes[:'DisplayFromEmailAddress']
-      end
-
-      if attributes.key?(:'DisplayEmailAddress')
-        self.display_email_address = attributes[:'DisplayEmailAddress']
       end
 
       if attributes.key?(:'DisplayToEmailAddress')
@@ -166,10 +157,6 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'display_from_email_address', display_from_email_address cannot be nil.")
       end
 
-      if @display_email_address.nil?
-        invalid_properties.push("invalid value for 'display_email_address', display_email_address cannot be nil.")
-      end
-
       if @display_to_email_address.nil?
         invalid_properties.push("invalid value for 'display_to_email_address', display_to_email_address cannot be nil.")
       end
@@ -198,7 +185,6 @@ module GroupDocsConversionCloud
     def valid?
       return false if @display_header.nil?
       return false if @display_from_email_address.nil?
-      return false if @display_email_address.nil?
       return false if @display_to_email_address.nil?
       return false if @display_cc_email_address.nil?
       return false if @display_bcc_email_address.nil?
@@ -215,7 +201,6 @@ module GroupDocsConversionCloud
           format == other.format &&
           display_header == other.display_header &&
           display_from_email_address == other.display_from_email_address &&
-          display_email_address == other.display_email_address &&
           display_to_email_address == other.display_to_email_address &&
           display_cc_email_address == other.display_cc_email_address &&
           display_bcc_email_address == other.display_bcc_email_address &&
@@ -234,7 +219,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, display_header, display_from_email_address, display_email_address, display_to_email_address, display_cc_email_address, display_bcc_email_address, time_zone_offset, convert_attachments, field_labels, preserve_original_date].hash
+      [format, display_header, display_from_email_address, display_to_email_address, display_cc_email_address, display_bcc_email_address, time_zone_offset, convert_attachments, field_labels, preserve_original_date].hash
     end
 
     # Downcases first letter.

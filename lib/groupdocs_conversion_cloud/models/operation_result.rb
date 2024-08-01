@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="msg_load_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="operation_result.rb">
  #   Copyright (c) 2003-2024 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,68 +28,69 @@
 require 'date'
 
 module GroupDocsConversionCloud
-  # Msg load options
-  class MsgLoadOptions
+  # Operation status result
+  class OperationResult
+    attr_accessor :id
+    attr_accessor :method
+    attr_accessor :status
+    attr_accessor :created
+    attr_accessor :started
+    attr_accessor :failed
+    attr_accessor :canceled
+    attr_accessor :finished
+    attr_accessor :result
+    attr_accessor :error
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # The format of input file, (\"docx\", for example). This field must be filled with correct input file format when using ConvertDirect method, which accept input file as binary stream, and, because of that, API can correctly handle LoadOptions. In regular conversion, the input file format taken from the input file name and this field ignored.
-    attr_accessor :format
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Option to display or hide the email header. Default: true
-    attr_accessor :display_header
-
-    # Option to display or hide \"from\" email address. Default: true
-    attr_accessor :display_from_email_address
-
-    # Option to display or hide \"to\" email address. Default: true
-    attr_accessor :display_to_email_address
-
-    # Option to display or hide \"Cc\" email address. Default: false
-    attr_accessor :display_cc_email_address
-
-    # Option to display or hide \"Bcc\" email address. Default: false
-    attr_accessor :display_bcc_email_address
-
-    # Gets or sets the Coordinated Universal Time (UTC) offset for the message dates. This property defines the time zone difference, between the localtime and UTC.
-    attr_accessor :time_zone_offset
-
-    # Option to convert attachments in source email or not. Default: false.
-    attr_accessor :convert_attachments
-
-    # The mapping between email message field and field text representation
-    attr_accessor :field_labels
-
-    # Defines whether need to keep original date header string in mail message when saving or not (Default value is true)
-    attr_accessor :preserve_original_date
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'format' => :'Format',
-        :'display_header' => :'DisplayHeader',
-        :'display_from_email_address' => :'DisplayFromEmailAddress',
-        :'display_to_email_address' => :'DisplayToEmailAddress',
-        :'display_cc_email_address' => :'DisplayCcEmailAddress',
-        :'display_bcc_email_address' => :'DisplayBccEmailAddress',
-        :'time_zone_offset' => :'TimeZoneOffset',
-        :'convert_attachments' => :'ConvertAttachments',
-        :'field_labels' => :'FieldLabels',
-        :'preserve_original_date' => :'PreserveOriginalDate'
+        :'id' => :'Id',
+        :'method' => :'Method',
+        :'status' => :'Status',
+        :'created' => :'Created',
+        :'started' => :'Started',
+        :'failed' => :'Failed',
+        :'canceled' => :'Canceled',
+        :'finished' => :'Finished',
+        :'result' => :'Result',
+        :'error' => :'Error'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'format' => :'String',
-        :'display_header' => :'BOOLEAN',
-        :'display_from_email_address' => :'BOOLEAN',
-        :'display_to_email_address' => :'BOOLEAN',
-        :'display_cc_email_address' => :'BOOLEAN',
-        :'display_bcc_email_address' => :'BOOLEAN',
-        :'time_zone_offset' => :'String',
-        :'convert_attachments' => :'BOOLEAN',
-        :'field_labels' => :'Array<FieldLabel>',
-        :'preserve_original_date' => :'BOOLEAN'
+        :'id' => :'String',
+        :'method' => :'String',
+        :'status' => :'String',
+        :'created' => :'DateTime',
+        :'started' => :'DateTime',
+        :'failed' => :'DateTime',
+        :'canceled' => :'DateTime',
+        :'finished' => :'DateTime',
+        :'result' => :'Array<StoredConvertedResult>',
+        :'error' => :'String'
       }
     end
 
@@ -101,46 +102,46 @@ module GroupDocsConversionCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Format')
-        self.format = attributes[:'Format']
+      if attributes.key?(:'Id')
+        self.id = attributes[:'Id']
       end
 
-      if attributes.key?(:'DisplayHeader')
-        self.display_header = attributes[:'DisplayHeader']
+      if attributes.key?(:'Method')
+        self.method = attributes[:'Method']
       end
 
-      if attributes.key?(:'DisplayFromEmailAddress')
-        self.display_from_email_address = attributes[:'DisplayFromEmailAddress']
+      if attributes.key?(:'Status')
+        self.status = attributes[:'Status']
       end
 
-      if attributes.key?(:'DisplayToEmailAddress')
-        self.display_to_email_address = attributes[:'DisplayToEmailAddress']
+      if attributes.key?(:'Created')
+        self.created = attributes[:'Created']
       end
 
-      if attributes.key?(:'DisplayCcEmailAddress')
-        self.display_cc_email_address = attributes[:'DisplayCcEmailAddress']
+      if attributes.key?(:'Started')
+        self.started = attributes[:'Started']
       end
 
-      if attributes.key?(:'DisplayBccEmailAddress')
-        self.display_bcc_email_address = attributes[:'DisplayBccEmailAddress']
+      if attributes.key?(:'Failed')
+        self.failed = attributes[:'Failed']
       end
 
-      if attributes.key?(:'TimeZoneOffset')
-        self.time_zone_offset = attributes[:'TimeZoneOffset']
+      if attributes.key?(:'Canceled')
+        self.canceled = attributes[:'Canceled']
       end
 
-      if attributes.key?(:'ConvertAttachments')
-        self.convert_attachments = attributes[:'ConvertAttachments']
+      if attributes.key?(:'Finished')
+        self.finished = attributes[:'Finished']
       end
 
-      if attributes.key?(:'FieldLabels')
-        if (value = attributes[:'FieldLabels']).is_a?(Array)
-          self.field_labels = value
+      if attributes.key?(:'Result')
+        if (value = attributes[:'Result']).is_a?(Array)
+          self.result = value
         end
       end
 
-      if attributes.key?(:'PreserveOriginalDate')
-        self.preserve_original_date = attributes[:'PreserveOriginalDate']
+      if attributes.key?(:'Error')
+        self.error = attributes[:'Error']
       end
 
     end
@@ -149,32 +150,16 @@ module GroupDocsConversionCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @display_header.nil?
-        invalid_properties.push("invalid value for 'display_header', display_header cannot be nil.")
+      if @id.nil?
+        invalid_properties.push("invalid value for 'id', id cannot be nil.")
       end
 
-      if @display_from_email_address.nil?
-        invalid_properties.push("invalid value for 'display_from_email_address', display_from_email_address cannot be nil.")
+      if @method.nil?
+        invalid_properties.push("invalid value for 'method', method cannot be nil.")
       end
 
-      if @display_to_email_address.nil?
-        invalid_properties.push("invalid value for 'display_to_email_address', display_to_email_address cannot be nil.")
-      end
-
-      if @display_cc_email_address.nil?
-        invalid_properties.push("invalid value for 'display_cc_email_address', display_cc_email_address cannot be nil.")
-      end
-
-      if @display_bcc_email_address.nil?
-        invalid_properties.push("invalid value for 'display_bcc_email_address', display_bcc_email_address cannot be nil.")
-      end
-
-      if @convert_attachments.nil?
-        invalid_properties.push("invalid value for 'convert_attachments', convert_attachments cannot be nil.")
-      end
-
-      if @preserve_original_date.nil?
-        invalid_properties.push("invalid value for 'preserve_original_date', preserve_original_date cannot be nil.")
+      if @status.nil?
+        invalid_properties.push("invalid value for 'status', status cannot be nil.")
       end
 
       return invalid_properties
@@ -183,14 +168,42 @@ module GroupDocsConversionCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @display_header.nil?
-      return false if @display_from_email_address.nil?
-      return false if @display_to_email_address.nil?
-      return false if @display_cc_email_address.nil?
-      return false if @display_bcc_email_address.nil?
-      return false if @convert_attachments.nil?
-      return false if @preserve_original_date.nil?
+      return false if @id.nil?
+      return false if @method.nil?
+      method_validator = EnumAttributeValidator.new('String', ["Convert", "ConvertAndSave"])
+      return false unless method_validator.valid?(@method)
+      return false if @status.nil?
+      status_validator = EnumAttributeValidator.new('String', ["Created", "Started", "Failed", "Canceled", "Finished"])
+      return false unless status_validator.valid?(@status)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] method Object to be assigned
+    def method=(method)
+      validator = EnumAttributeValidator.new('String', ["Convert", "ConvertAndSave"])
+      if method.to_i == 0
+        unless validator.valid?(method)
+          raise ArgumentError, "invalid value for 'method', must be one of #{validator.allowable_values}."
+        end
+        @method = method
+      else
+        @method = validator.allowable_values[method.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["Created", "Started", "Failed", "Canceled", "Finished"])
+      if status.to_i == 0
+        unless validator.valid?(status)
+          raise ArgumentError, "invalid value for 'status', must be one of #{validator.allowable_values}."
+        end
+        @status = status
+      else
+        @status = validator.allowable_values[status.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -198,16 +211,16 @@ module GroupDocsConversionCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          format == other.format &&
-          display_header == other.display_header &&
-          display_from_email_address == other.display_from_email_address &&
-          display_to_email_address == other.display_to_email_address &&
-          display_cc_email_address == other.display_cc_email_address &&
-          display_bcc_email_address == other.display_bcc_email_address &&
-          time_zone_offset == other.time_zone_offset &&
-          convert_attachments == other.convert_attachments &&
-          field_labels == other.field_labels &&
-          preserve_original_date == other.preserve_original_date
+          id == other.id &&
+          method == other.method &&
+          status == other.status &&
+          created == other.created &&
+          started == other.started &&
+          failed == other.failed &&
+          canceled == other.canceled &&
+          finished == other.finished &&
+          result == other.result &&
+          error == other.error
     end
 
     # @see the `==` method
@@ -219,7 +232,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, display_header, display_from_email_address, display_to_email_address, display_cc_email_address, display_bcc_email_address, time_zone_offset, convert_attachments, field_labels, preserve_original_date].hash
+      [id, method, status, created, started, failed, canceled, finished, result, error].hash
     end
 
     # Downcases first letter.
