@@ -12,7 +12,7 @@ gem install groupdocs_conversion_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_conversion_cloud", "~> 24.8"
+gem "groupdocs_conversion_cloud", "~> 24.11"
 ```
 
 ## Getting Started

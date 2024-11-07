@@ -37,11 +37,44 @@ module GroupDocsConversionCloud
     # Enable or disable generation of page numbering in converted document. Default: false
     attr_accessor :page_numbering
 
+    # Get or sets the encoding to be used when loading the web document. If the property is null the encoding will be determined from document character set attribute
+    attr_accessor :encoding
+
+    # Use pdf for the conversion. Default: false
+    attr_accessor :use_pdf
+
+    # Controls how HTML content is rendered. Default: AbsolutePositioning
+    attr_accessor :rendering_mode
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'format' => :'Format',
-        :'page_numbering' => :'PageNumbering'
+        :'page_numbering' => :'PageNumbering',
+        :'encoding' => :'Encoding',
+        :'use_pdf' => :'UsePdf',
+        :'rendering_mode' => :'RenderingMode'
       }
     end
 
@@ -49,7 +82,10 @@ module GroupDocsConversionCloud
     def self.swagger_types
       {
         :'format' => :'String',
-        :'page_numbering' => :'BOOLEAN'
+        :'page_numbering' => :'BOOLEAN',
+        :'encoding' => :'String',
+        :'use_pdf' => :'BOOLEAN',
+        :'rendering_mode' => :'String'
       }
     end
 
@@ -69,6 +105,18 @@ module GroupDocsConversionCloud
         self.page_numbering = attributes[:'PageNumbering']
       end
 
+      if attributes.key?(:'Encoding')
+        self.encoding = attributes[:'Encoding']
+      end
+
+      if attributes.key?(:'UsePdf')
+        self.use_pdf = attributes[:'UsePdf']
+      end
+
+      if attributes.key?(:'RenderingMode')
+        self.rendering_mode = attributes[:'RenderingMode']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -79,6 +127,14 @@ module GroupDocsConversionCloud
         invalid_properties.push("invalid value for 'page_numbering', page_numbering cannot be nil.")
       end
 
+      if @use_pdf.nil?
+        invalid_properties.push("invalid value for 'use_pdf', use_pdf cannot be nil.")
+      end
+
+      if @rendering_mode.nil?
+        invalid_properties.push("invalid value for 'rendering_mode', rendering_mode cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -86,7 +142,25 @@ module GroupDocsConversionCloud
     # @return true if the model is valid
     def valid?
       return false if @page_numbering.nil?
+      return false if @use_pdf.nil?
+      return false if @rendering_mode.nil?
+      rendering_mode_validator = EnumAttributeValidator.new('String', ["Flow", "AbsolutePositioning"])
+      return false unless rendering_mode_validator.valid?(@rendering_mode)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] rendering_mode Object to be assigned
+    def rendering_mode=(rendering_mode)
+      validator = EnumAttributeValidator.new('String', ["Flow", "AbsolutePositioning"])
+      if rendering_mode.to_i == 0
+        unless validator.valid?(rendering_mode)
+          raise ArgumentError, "invalid value for 'rendering_mode', must be one of #{validator.allowable_values}."
+        end
+        @rendering_mode = rendering_mode
+      else
+        @rendering_mode = validator.allowable_values[rendering_mode.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -95,7 +169,10 @@ module GroupDocsConversionCloud
       return true if self.equal?(other)
       self.class == other.class &&
           format == other.format &&
-          page_numbering == other.page_numbering
+          page_numbering == other.page_numbering &&
+          encoding == other.encoding &&
+          use_pdf == other.use_pdf &&
+          rendering_mode == other.rendering_mode
     end
 
     # @see the `==` method
@@ -107,7 +184,7 @@ module GroupDocsConversionCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format, page_numbering].hash
+      [format, page_numbering, encoding, use_pdf, rendering_mode].hash
     end
 
     # Downcases first letter.
