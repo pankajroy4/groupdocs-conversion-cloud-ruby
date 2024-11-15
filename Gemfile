@@ -5,3 +5,4 @@ gemspec
 group :development, :test do
   gem 'rake', '~> 13.0.1'
 end
+gem 'faraday','~> 1.0'
